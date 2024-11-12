@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block portada %}
+<div id="inicio" class="paralax-class">    
+    <div class="fondo fade-in-image"></div>   
+</div>
+{% endblock %}
+{% block servicios %}
+    <main id="mainMenu" >
+        <div class="simple-gradient">
+            <div  class="d-flex justify-content-center p-4">
+                <h2 id="servicios" style="color: white;">Nuestros Servicios</h2>
+            </div>
+            <div class="container text-center">
+                <div class="row">
+                    {% for category in categorys %}
+                        <div class="col-sm-3 mb-4 text-center"> <!-- Cambia col-sm-6 a col-md-6 para 2 tarjetas por fila en pantallas medianas y mayores -->
+                            <div class="card d-flex" style="width: 16rem;">
+                                <h2 class="text-center mt-3 mb-3" style="height: 4rem;" >{{ category.title }}</h2>
+                                <img src="{{ category.image.url }}" style="align-self: center;" class="card-img-top imagen" alt="{{ category.title }}">
+                                <div class="card-body">
+                                    <p class="card-text">{{ category.description|truncatechars:300}}</p>   
+                                    <p><a class="btn btn-md btnColor" href="{% url 'Service:service' category.id %}">Ver más</a></p>  
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+{% block quienes%}
+    <section id="quienesSomos" class="quienes_somos pt-5">
+        <h1 class="pt-5 px-5" style="color:#f36c21 ;" >Quienes Somos?</h1>
+        <div class="mx-5">
+            <div class="parrafo-1 gap-4">
+                <p class="fs-4">Somos una empresa familiar con más de 15 años de experiencia en el mundo de la impresión y la litografía.
+                    
+                Fundada con el propósito de brindar soluciones de alta calidad, hemos evolucionado para ofrecer mucho más que servicios de impresión.Nuestro enfoque se basa en la pasión por lo que hacemos y en el compromiso de transformar tus ideas en proyectos exitosos, adaptándonos a tus necesidades específicas con atención y dedicación.</p>
+                <div style="height: 300px;">
+                    <img class="img-life" src="../../media/media/imgs/fondo.png" style="height: 300px;" >
+                </div>
+                
+            </div>
+            <br>
+            <div class="d-flex gap-4 mt-3" > 
+            <div style="height: 300px;">
+                <img class="img-life" src="../../media/media/imgs/life.jpg" style="height: 300px;" >
+            </div>
+            <p class="fs-4" >Nos especializamos en proporcionar un servicio integral que abarca desde la impresión de materiales de alta calidad hasta soluciones personalizadas que se ajustan a una amplia variedad de requerimientos. Nuestro equipo trabaja con esmero para asegurar que cada detalle de tu proyecto reciba el cuidado que merece, ya sea que seas una empresa o parte del público en general.</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block correo %}
+<div class="d-flex justify-content-center ">
+    <section  id="contacto" style="padding-top: 3rem;" class="col-lg-4 mb-4 mt-5 mb-4">
+        <h5 class="mx-2">Envianos un mensaje y en breve nos estaremos comunicando.</h3>
+        <form method="post" action="{% url 'index' %}" id="correoForm" >
+            {% csrf_token %}
+            <div class="mx-2">
+                <label for="email" class="form-label">Correo</label>
+                <input type="email" name="email" class="form-control" aria-describedby="emailHelp" required>
+                <div id="emailHelp" class="form-text" >Nunca compartiremos tu email con nadie más</div>
+            </div>
+            <div class="mx-2">
+                <label for="asunto" class="form-label" >Asunto</label>
+                <input type="text" class="form-control" name="asunto" required>
+            </div>
+            <div class="mx-2">
+                <label for="message" class="form-label">Mensaje</label>
+                <textarea name="message" class="form-control" rows="7" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mx-2 my-3">Enviar</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

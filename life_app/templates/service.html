@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block main_content %}
+{% endblock %}
+{% block content %}
+<main class="mt-5">
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            {% for service in services %}
+                <div class="col-3 mt-5"> <!-- Cambia col-sm-6 a col-md-6 para 2 tarjetas por fila en pantallas medianas y mayores -->
+                    <div class="card" style="width: 16rem;">
+                        <img src="{{service.image.url }}" class="card-img-top" alt="{{service.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{service.title }}</h5>
+                            <p class="card-text">{{service.description}}</p>   
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}
